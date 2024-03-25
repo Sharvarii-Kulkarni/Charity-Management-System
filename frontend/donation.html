@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.15.3/css/all.css"
+      integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk"
+      crossorigin="anonymous"
+    />
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/donation.css" />
+    <title>BeKind CHARITY - Donate</title>
+  </head>
+  <body>
+    <div class="nevbar" id="nevbar">
+      <div class="logo">
+        <a href="index.html" id="logo"
+          ><h1><span>-</span> CHARITY</h1></a
+        >
+      </div>
+
+      <div class="menu" id="menu">
+        <ul>
+          <li><a id="home" href="index.html">Home</a></li>
+        </ul>
+      </div>
+      <div class="menuicon">
+        <i
+          id="menuicon"
+          onclick="togglemenu()"
+          class="fas fa-chevron-circle-down"
+        >
+          <span>MENU</span></i
+        >
+      </div>
+    </div>
+
+    <div class="cover">
+      <div class="information">
+        <h1>-</h1>
+        <h2>Donation Quote</h2>
+        <br />
+        <h2>PLease fill in your details</h2>
+        <div class="donorform">
+          <div class="form1">
+            <form>
+              <style>
+                ::placeholder {
+                  color: rgba(255, 255, 255, 0.7);
+                }
+              </style>
+
+              <input type="text" name="name" id="name" placeholder="NAME" required />
+              <input type="email" name="email" id="email" placeholder="EMAIL" required />
+              <input
+                type="text"
+                name="address"
+                id="addr"
+                placeholder="ADDRESS"
+                required
+              />
+              <input
+                type="tel"
+                name="phone"
+                id="phone"
+                placeholder="CONTACT NUMBER"
+                required
+              />
+              <!-- <button type="submit">Proceed</button> -->
+            </form>
+          </div>
+        </div>
+
+        <div class="content">
+          <h2>Please make your kind donation.</h2>
+          <br />
+
+          <form id="donationForm" method="get">
+            <div class="form-group">
+              <label for="amount">Amount</label>
+              <input
+                type="number"
+                class="form-control"
+                id="amount"
+                placeholder="Enter amount"
+              />
+            </div>
+            <button
+              type="button"
+              class="btn btn-primary"
+              id="donateBtn"
+              onClick="donate()"
+            >
+              Donate</button
+            ><br /><br />
+          </form>
+
+          <div class="checkboxDiv">
+            <h2>Would you like to donate anything else?</h2>
+            <br />
+            <h3>
+              <p>
+                If you wish to donate other than money you can. Following are
+                the options. In order to donate the below, you need to select
+                the options and then make an appoinment with us. On that
+                particular day the donation will be collected from you. Once you
+                select the donations and made an appoinment we will contact you
+                for confirmation.
+              </p>
+            </h3>
+            <p class="p2">So what would you like to donate?</p>
+            <!-- <br> -->
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" id="clothes" />
+              <label class="form-check-label" for="clothes">Clothes</label>
+            </div>
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" id="furniture" />
+              <label class="form-check-label" for="furniture">Furniture</label>
+            </div>
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" id="utensils" />
+              <label class="form-check-label" for="utensils">Utensils</label>
+            </div>
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" id="other" />
+              <label class="form-check-label" for="other">Other</label>
+            </div>
+            <button
+              type="button"
+              class="btn btn-primary mt-3"
+              id="appointmentBtn"
+            >
+              Make an appointment
+            </button>
+          </div>
+
+          <div id="appointmentDiv" class="mt-5" style="display: none">
+            <h2>Book an appointment</h2>
+            <br />
+            <div class="form-group">
+              <label for="appointmentDate">Appointment Date</label>
+              <input type="date" class="form-control" id="appointmentDate" />
+            </div>
+            <button
+              type="button"
+              class="btn btn-primary"
+              id="confirmAppointmentBtn"
+              onClick="confirmAppoinment()">
+              Confirm Appointment
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      $(document).ready(function () {
+        $("#donateBtn").click(function () {
+          $("#checkboxDiv").show();
+        });
+        $("#appointmentBtn").click(function () {
+          $("#appointmentDiv").show();
+        });
+        $("#confirmAppointmentBtn").click(function () {
+          alert("Thankyou for donating");
+        });
+      });
+      var menu = document.getElementById("menu");
+      menu.style.maxHeight = "0px";
+      function togglemenu() {
+        if (menu.style.maxHeight == "0px") {
+          menu.style.maxHeight = "390px";
+        } else {
+          menu.style.maxHeight = "0px";
+        }
+      }
+      function donate() {
+        //let nam=document.getElementById(name).val();
+        const data = {
+          name: document.getElementById("name").value,
+          email: document.getElementById("email").value,
+          address: document.getElementById("addr").value,
+          contact_number:document.getElementById("phone").value,
+          amount:document.getElementById("amount").value
+        };
+        fetch("http://localhost:8000/app.js", {
+          method: "post",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        })
+          .then((response) => {
+            // Check if the response is successful
+            if (!response.ok) {
+              throw new Error("Network response was not ok");
+            }
+            // Parse the response as JSON
+            return response.json(); // Return the Promise
+          })
+          .then((data) => {
+            // Work with the JSON data
+            console.log(data);
+          })
+          .catch((error) => {
+            // Handle any errors that occur during the fetch operation
+            console.error(
+              "There was a problem with the fetch operation:",
+              error
+            );
+          });
+      }
+      function confirmAppoinment(){
+        const data = {
+          name: document.getElementById("name").value,
+          email: document.getElementById("email").value,
+          address: document.getElementById("addr").value,
+          contact_number: document.getElementById("phone").value,
+          amount: document.getElementById("amount").value,
+          appointmentDate: document.getElementById("appointmentDate").value,
+        
+          // Check if each checkbox is checked and assign 1 for checked, 0 for unchecked
+          clothes: document.getElementById("clothes").checked ? 1 : 0,
+          furniture: document.getElementById("furniture").checked ? 1 : 0,
+          utensils: document.getElementById("utensils").checked ? 1 : 0,
+          other: document.getElementById("other").checked ? 1 : 0
+        };
+        fetch("http://localhost:8000/app.js", {
+          method: "post",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        })
+          .then((response) => {
+            // Check if the response is successful
+            if (!response.ok) {
+              throw new Error("Network response was not ok");
+            }
+            // Parse the response as JSON
+            return response.json(); // Return the Promise
+          })
+          .then((data) => {
+            // Work with the JSON data
+            console.log(data);
+          })
+          .catch((error) => {
+            // Handle any errors that occur during the fetch operation
+            console.error(
+              "There was a problem with the fetch operation:",
+              error
+            );
+          });
+        }
+    </script>
+  </body>
+</html>
