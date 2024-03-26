@@ -31,19 +31,15 @@ app.post("/app.js", (req, res) => {
       res.status(200).json({ message: "Data inserted successfully" });
     }
   });
+});
 
-  const insertQuery2 = "INSERT INTO otherdonations (name, email,contact_number,address,amount,donation_type,appoinmentDate) VALUES ($1, $2,$3,$4,$5,$6,$7)";
+app.post("/donor", (req, res) => {
+  const insertQuery2 = "INSERT INTO otherdonations (name, email,contact_number,address,amount,donation_type,appointment_date) VALUES ($1, $2,$3,$4,$5,$6,$7)";
 
     // data to insert other donations
-    const otherdonations = [req.body.name, req.body.email,req.body.contact_number,req.body.address,req.body.amount,req.body.donation_type, req.body.appoinmentDate];
+    const otherdonations = [req.body.name, req.body.email, req.body.contact_number, req.body.address, req.body.amount,req.body.donation_type, req.body.appointmentDate];
 
-     // Construct donation_type based on selected checkboxes
-     let donation_type = [];
-     if (clothes === 1) donation_type.push("clothes");
-     if (furniture === 1) donation_type.push("furniture");
-     if (utensils === 1) donation_type.push("utensils");
-     if (other === 1) donation_type.push("other");
-     donation_type = donation_type.join(", ");
+    console.log('name ',req.body.name,'email', req.body.email,'contact', req.body.contact_number,'add', req.body.address,'amount', req.body.amount,'donation type', req.body.donation_type,'date', req.body.appointmentDate)
 
     // Execute the INSERT query using the pool
     pool.query(insertQuery2, otherdonations, (error2, result2) => {
@@ -55,8 +51,6 @@ app.post("/app.js", (req, res) => {
       res.status(200).json({ message: "Data inserted successfully" });
     }
   });
-
-  
 });
 
 app.listen(port, () => {
