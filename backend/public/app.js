@@ -53,6 +53,18 @@ app.post("/donor", (req, res) => {
   });
 });
 
+// Handle GET request for logging in
+app.get("/donors", (req, res) => {
+    pool.query('SELECT * FROM otherdonations', (error, results) => {
+      if (error) {
+        console.error('Error fetching donor details:', error);
+        res.status(500).json({ error: 'Error fetching donor details.' });
+      } else {
+        res.status(200).json(results.rows); // Return donor details as JSON
+      }
+    });
+  
+});
 app.listen(port, () => {
   console.log("started");
 });
