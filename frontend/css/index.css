@@ -106,7 +106,7 @@ html {
 .cover {
     width: 100%;
     height: 120vh;
-    background: linear-gradient(rgba(0, 0, 0, 0.8),rgba(0, 0, 0, 0.6)) , url('../images/beKind.jpg');
+    background: linear-gradient(rgba(0, 0, 0, 0.8),rgba(0, 0, 0, 0.6)) , url('https://source.unsplash.com/1600x900/?contact,message');
     /* z-index: -200;  */
     color: white;
 }
