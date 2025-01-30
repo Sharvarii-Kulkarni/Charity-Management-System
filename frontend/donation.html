@@ -157,8 +157,8 @@
         contact_number: document.getElementById("phone").value,
         amount: document.getElementById("amount").value
       };
-      fetch("http://localhost:8000/app.js", {
-        method: "post",
+      fetch("http://localhost:8000/donate", {
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
         },

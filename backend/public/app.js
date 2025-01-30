@@ -14,7 +14,7 @@ const port = 8000;
 const cors = require("cors");
 app.use(cors());
 app.use(express.json());
-app.post("/app.js", (req, res) => {
+app.post("/donate", (req, res) => {
   // let nam = req.body.name;
   const insertQuery = "INSERT INTO donors (name, email,contact_number,address,amount) VALUES ($1, $2,$3,$4,$5)";
 
