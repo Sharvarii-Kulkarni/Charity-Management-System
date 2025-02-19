@@ -149,13 +149,20 @@
       }
     }
     function donate() {
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const address = document.getElementById("addr").value.trim();
+    const contact_number = document.getElementById("phone").value.trim();
+    const amount = document.getElementById("amount").value.trim();
+
+  // Check if any field is empty
+  if (!name || !email || !address || !contact_number || !amount) {
+    alert("Please fill in all the required fields before donating.");
+    return; // Stop execution if fields are empty
+  }
       //let nam=document.getElementById(name).val();
       const data = {
-        name: document.getElementById("name").value,
-        email: document.getElementById("email").value,
-        address: document.getElementById("addr").value,
-        contact_number: document.getElementById("phone").value,
-        amount: document.getElementById("amount").value
+        name, email, address, contact_number, amount
       };
       fetch("http://localhost:8000/donate", {
         method: "POST",
@@ -185,19 +192,48 @@
         });
     }
     function confirmAppoinment() {
+
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const address = document.getElementById("addr").value.trim();
+      const contact_number = document.getElementById("phone").value.trim();
+      const amount = document.getElementById("amount").value.trim();
+      const appointmentDate = document.getElementById("appointmentDate").value.trim();
+
+
       let donation_type = [];
       if (document.getElementById("clothes").checked) donation_type.push("clothes");
       if (document.getElementById("furniture").checked) donation_type.push("furniture");
       if (document.getElementById("utensils").checked) donation_type.push("utensils");
       if (document.getElementById("other").checked) donation_type.push("other");
+      
+
+      // Check if required fields are empty
+        if (!name || !email || !address || !contact_number) {
+          alert("Please fill in all required fields (Name, Email, Address, Contact).");
+          return;
+        }
+
+      // Ensure at least one donation type is selected if appointment is required
+      if (donation_type.length === 0 && !amount) {
+        alert("Please enter an amount or select at least one donation type.");
+        return;
+      }
+
+      // If user is donating only money, appointment is not required
+      if (donation_type.length > 0 && !appointmentDate) {
+        alert("Please select an appointment date for non-monetary donations.");
+        return;
+      }
+      
       const data = {
-        name: document.getElementById("name").value,
-        email: document.getElementById("email").value,
-        address: document.getElementById("addr").value,
-        contact_number: document.getElementById("phone").value,
-        amount: document.getElementById("amount").value,
-        appointmentDate: document.getElementById("appointmentDate").value,
-        donation_type: donation_type.join(", ") // Pass the constructed donation_type string
+        name,
+        email,
+        address,
+        contact_number,
+        amount: amount || "0", // Default to 0 if no amount is entered
+        appointmentDate: donation_type.length > 0 ? appointmentDate : "N/A", // Appointment is required only for non-monetary donations
+        donation_type: donation_type.join(", ") || "Money Only"
       };
       fetch("http://localhost:8000/donor", {
         method: "post",

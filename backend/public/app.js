@@ -7,7 +7,7 @@ const pool = new Pool({
   user: "postgres",
   host: "localhost",
   database: "charity",
-  password: "sharvari3083",
+  password: "sharvari383",
   port: 5432, // Default PostgreSQL port
 });
 const port = 8000;
@@ -68,3 +68,7 @@ app.get("/donors", (req, res) => {
 app.listen(port, () => {
   console.log("started");
 });
+app.use((req, res) => {
+  res.status(404).json({ error: "Route not found" });
+});
+//http://localhost:8000/invalidroute
